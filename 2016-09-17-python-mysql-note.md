@@ -8,7 +8,7 @@ tags: ["python", "mysql"]
 ---
 ## 查看版本1
 
-{% highlight python %}
+```
 import MySQLdb as mdb
 import sys
 
@@ -35,11 +35,11 @@ finally:
 
     if con:
         con.close()
-{%endhighlight%}
+```
 
 ## 查看版本2
 
-{% highlight python %}
+```
 import _mysql
 import sys
 
@@ -65,13 +65,13 @@ finally:
 
   if con:
     con.close()
-{%endhighlight%}
+```
 
 
 ## 插入数据
 
 
-{% highlight python %}
+```
 import MySQLdb as mdb
 import sys
 
@@ -88,12 +88,12 @@ with con:
     cur.execute("INSERT INTO Writers(Name) VALUES('Emile Zola')")
     cur.execute("INSERT INTO Writers(Name) VALUES('Truman Capote')")
 
-{%endhighlight%}
+```
 
 
 ## 遍历数据
 
-{% highlight python %}
+```
 import MySQLdb as mdb
 import sys
 
@@ -108,13 +108,13 @@ with con:
     for i in range(numrows):
         row = cur.fetchone()
         print row
-{%endhighlight%}
+```
 
 
 ## 删除数据
 
 
-{% highlight python %}
+```
 import MySQLdb as mdb
 import sys
 
@@ -138,4 +138,4 @@ except mdb.Error, e:
 
 cursor.close()
 conn.close()
-{%endhighlight%}
+```

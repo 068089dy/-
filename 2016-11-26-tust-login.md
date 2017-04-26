@@ -6,7 +6,7 @@ keywords: ["python", "urllib"]
 description: "python urllib"
 tags: ["python", "urllib"]
 ---
-{%highlight python%}
+```
 # coding:utf-8
 
 import urllib
@@ -109,4 +109,4 @@ class tust_login(object):
 if __name__ == "__main__":
     tust_login().login()
 
-{%endhighlight%}
+```

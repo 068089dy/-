@@ -10,9 +10,9 @@ tags: ["linux", "网络"]
 中间人攻击是一种常见的计算机攻击手段，其原理是攻击者主机冒充网关对被攻击者的接收数据动手脚，下面我们来讲解一下如何进行中间人攻击，并且如何有效的应对这种攻击。
 # 1.攻击
 我们首先要保证攻击机和被攻击机在同一局域网下，还要用到一款软件‘ettercap’，它可谓是局域网攻击神器，ubuntu/debian下利用apt直接进行下载
-{% highlight bash %}
+```
 sudo apt-get install ettercap
-{%endhighlight%}
+```
 （用阿里云的源可以直接下载）,或者在[github](https://github.com/Ettercap/ettercap)上下载源码。
 安装完成之后，打开  
 ![](https://raw.githubusercontent.com/068089dy/068089dy.github.io/master/media/img/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E9%98%B21/ettercap1.png)
@@ -46,12 +46,12 @@ plugins->manage the plugin
 ubuntu下，可以
 {% highlight bash%}
 sudo apt-get install driftnet
-{%endhighlight%}
+```
 直接下，还是阿里云的源哦：）  
 然后在终端输入
-{% highlight bash %}
+```
 sudo driftnet -i wlp3s0
-{%endhighlight%}
+```
 我攻击了我的手机，这是我手机在访问b站时的画面
 ![](https://raw.githubusercontent.com/068089dy/068089dy.github.io/master/media/img/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E9%98%B21/bili2.jpg)
 这是我的电脑截取到的

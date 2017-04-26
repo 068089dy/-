@@ -10,37 +10,37 @@ tags: ["project", "smack","android","xmpp"]
 http://blog.csdn.net/wangyi_lin/article/details/6953606
 ## 1.连接
 
-{% highlight java %}
+```
 ConnectionConfiguration connConfig = new ConnectionConfiguration("123.207.174.226", 5222);			
 XMPPConnection con = new XMPPConnection(connConfig);
 connConfig.setSendPresence(false);//设置状态为离线
 con.connect();
-{%endhighlight%}
+```
 
 ## 2.断开
 
-{% highlight java %}
+```
 con.disconnect();
-{%endhighlight%}
+```
 
 ## 3.登陆
 
-{% highlight java %}
+```
 con.login("user1","123456");
-{%endhighlight%}
+```
 
 ## 4.发消息
 
-{% highlight java %}
+```
 ChatManager cm =con.getChatManager();
 Chat newchat = cm.createChat("user2@123.207.174.226", null);
 String msg = "qwewerwer";
 newchat.sendMessage(msg);
-{%endhighlight%}
+```
 
 ## 5.注册用户
 
-{% highlight java %}
+```
 public static boolean createAccount(XMPPConnection connection,String regUserName,String regUserPwd)
 {
   try {
@@ -50,11 +50,11 @@ public static boolean createAccount(XMPPConnection connection,String regUserName
     return false;
   }
 }
-{%endhighlight%}
+```
 
 ## 6.删除当前用户
 
-{% highlight java %}
+```
 public static boolean deleteAccount(XMPPConnection connection)
 {
   try {
@@ -64,11 +64,11 @@ public static boolean deleteAccount(XMPPConnection connection)
     return false;
   }
 }
-{%endhighlight%}
+```
 
 ## 7.监听消息1
 
-{% highlight java %}
+```
 class TaxiChatManagerListener implements ChatManagerListener {
 
     public void chatCreated(Chat chat, boolean arg1) {
@@ -122,11 +122,11 @@ MessageListener msgListener = new MessageListener()
     }
 };
 Chat chat = Client.getConnection().getChatManager().createChat(userName, msgListener);
-{%endhighlight%}
+```
 
 ## 8.获取好友列表
 
-{% highlight java %}
+```
 Roster roster = XMPP_data.connection.getRoster();
 Collection<RosterGroup> entriesGroup = roster.getGroups();
 for(RosterGroup group: entriesGroup){
@@ -136,11 +136,11 @@ for(RosterGroup group: entriesGroup){
         System.out.println("name:"+entry.getName());
     }
 }
-{%endhighlight%}
+```
 
 ## 9.获取离线消息
 
-{% highlight java %}
+```
 //需要先将状态设置为离线（connConfig.setSendPresence(false);//设置状态为离线）
 OfflineMessageManager offlineManager = new OfflineMessageManager(con);  
 try
@@ -171,13 +171,13 @@ try
 }
 Presence presence = new Presence(Presence.Type.available);
 con.sendPacket(presence);//设置状态为在线
-{%endhighlight%}
+```
 
 
 
 ## 10.搜索好友
 
-{% highlight java %}
+```
 String searchService = "search."+con.getServiceName();
 try{
     UserSearchManager search = new UserSearchManager(con);
@@ -199,13 +199,13 @@ try{
 }catch(Exception e){
     System.out.print(e);
 }
-{%endhighlight%}
+```
 在android平台使用会报错，这是需要添加一行
-{% highlight java %}
+```
 ProviderManager.getInstance().addIQProvider("query", "jabber:iq:search", new UserSearch.Provider());
-{%endhighlight%}
+```
 
-{% highlight java %}
+```
 ProviderManager.getInstance().addIQProvider("query", "jabber:iq:search", new UserSearch.Provider());
 String searchService = "search."+XMPP_data.connection.getServiceName();
 Log.d("server",XMPP_data.connection.getServiceName());
@@ -236,13 +236,13 @@ try{
 }catch(Exception e){
     Log.d("search error:",e.toString());
 }
-{%endhighlight%}
+```
 然后在XMPPConnection初始化时添加
-{% highlight java %}
+```
 configure(ProviderManager.getInstance());
-{%endhighlight%}
+```
 configure函数如下：
-{% highlight java %}
+```
 public static void configure(ProviderManager pm)
     {
 
@@ -344,9 +344,9 @@ public static void configure(ProviderManager pm)
         pm.addExtensionProvider("bad-sessionid", "http://jabber.org/protocol/commands", new AdHocCommandDataProvider.BadSessionIDError());
         pm.addExtensionProvider("session-expired", "http://jabber.org/protocol/commands", new AdHocCommandDataProvider.SessionExpiredError());
     }
-{%endhighlight%}
+```
 ## 11.添加好友
-{% highlight java %}
+```
 try {
     Roster roster1 = con.getRoster();
     roster1.createEntry("user4@123.207.174.226", "nickName", new String[]{"test1"});//发送添加好友请求，并将该jid用户加入到自己的roster中
@@ -358,10 +358,10 @@ try {
 Presence p = new Presence(Presence.Type.subscribe);
 p.setTo("user2@123.207.174.226");
 con.sendPacket(p);
-{%endhighlight%}
+```
 
 ## 12.添加好友监听
-{% highlight java %}
+```
 //条件过滤器
 PacketFilter filter = new AndFilter(new PacketTypeFilter(Presence.class));
 //packet监听器
@@ -393,7 +393,7 @@ PacketListener listener = new PacketListener() {
     }
 };
 con.addPacketListener(listener, filter); //添加监听
-{%endhighlight%}
+```
 
 ## 14.群聊
 创建群聊
@@ -411,7 +411,7 @@ public void createroom(){
 
 ## 13.文件收发(未成功)
 
-{% highlight java %}
+```
 public static void sendFile(XMPPConnection connection,String user, File file) throws XMPPException, InterruptedException {  
         File f1 =new File("c:\\abc\\1.txt");
         System.out.println("发送文件开始"+file.getName());  
@@ -553,24 +553,24 @@ public class RecFileTransferListener implements FileTransferListener {
         inTransfer.recieveFile(file);
   }
 }
-{%endhighlight%}
+```
 
 ## 获取Openfire离线消息乱码问题解决方案  
 
 1）Mysql数据库系统编码问题，修改mysql配置文件my.cnf，将数据库系统默认字符集设置成utf8，再重启Mysql：
 
-{% highlight bash %}
+```
 [mysqld]
 character-set-server=utf8
 [mysql]
 default-character-set=utf8
-{%endhighlight%}
+```
 
 2）还是老生常谈，建库，建表，建字段时也指定编码是utf8。
 
-{% highlight bash %}
+```
 create database openfire default character set utf8 default collate utf8_general_ci;
-{%endhighlight%}
+```
 
 3）修改Openfire配置文件，conf下的openfire.xml的serverURL改成这个
 jdbc:mysql://127.0.0.1:3306/openfire?rewriteBatchedStatements=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8

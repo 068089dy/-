@@ -67,3 +67,30 @@ ffmpeg -re -i a.mp4 -vprofile baseline -vcodec copy -acodec copy -strict -2 -f f
 ```
 ffplay rtmp://192.168.1.170/myapp/test1
 ```
+## 5.推流拉流权限控制
+### *推流限制：
+在配置文件中添加on-publish
+application myapp {
+    live on;
+    on_publish url;
+}
+on_publish将rtmp地址中的信息post提交给url，由这个url做处理，返回码如果为200，就可以推流；
+我使用django做的处理：
+推流地址为rtmp://172.18.208.233/myapp/test?pass=password
+#直播测试
+def on_publish(request):
+    if request.POST:
+        passwd = request.POST['pass']
+        user = request.POST['name']
+        if user = "test" and passwd = "password":
+            return HttpResponse(status=200)
+        else:
+            return HttpResponse(status=404)
+    else:
+        return HttpResponse(status=404)
+### *推流结束：
+在配置文件中添加on-publish
+application myapp {
+    live on;
+    on_publish_done url;
+}

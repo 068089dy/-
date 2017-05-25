@@ -207,10 +207,17 @@ python manage.py shell
 
 安装uwsgi和nginx
 
+
 ```
 pip3 install uwsgi
 sudo apt-get install nginx
 ```
+
+方法2(apt安装在以后执行命令时要加上--plugin python3)：
+```
+sudo apt install uwsgi
+```
+
 
 #### 7.1.uwsgi
 
@@ -228,6 +235,13 @@ def application(env, start_response):
 
 ```
 uwsgi --http :8001 --wsgi-file test.py
+
+```
+apt安装的要这样
+```
+
+uwsgi --need-plugin python3 --httpocket :8001 --wsgi-file test.py 
+
 ```
 
 然后进入浏览器访问127.0.0.1:8001，浏览器返回“Hello World”就没问题了
@@ -252,7 +266,7 @@ chmod-socket=664
 然后执行my_uwsgi.ini
 
 ```
-uwsgi --ini my_uwsgi.ini
+uwsgi --ini my_uwsgi.ini (--plugin python3)
 ```
 
 #### 7.2.nginx

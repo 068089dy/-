@@ -74,6 +74,18 @@ sudo gedit /etc/default/apport
 lsb_release -a
 uname -a
 ```
+
+## ubuntu安装flash
+chrome
+```
+sudo apt-get install pepperflashplugin-nonfree
+sudo update-pepperflashplugin-nonfree --install
+```
+firefox
+```
+sudo apt install flashplugin-installer
+```
+
 ## 更改gnome桌面主题
 
 将主题复制到usr/share/themes

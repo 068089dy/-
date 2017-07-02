@@ -274,6 +274,7 @@ uwsgi --ini my_uwsgi.ini (--plugin python3)
 更改/etc/nginx/nginx.conf
 
 ```
+user dy;(注意这里！注意这里！注意这里！不然nginx没有权限读取static)
 
 http{
 
@@ -301,10 +302,15 @@ http{
 然后，重启或重载文件
 
 ```
-
+#ubuntu
 >>> service nginx restart
-
 >>> service nginx reload
+#archlinux
+>>> systemctl start nginx
+>>> systemctl stop nginx
+或者：
+sudo nginx -s stop
+sudo nginx -c nginx.conf(sudo nginx)
 
 ```
 

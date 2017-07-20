@@ -231,8 +231,36 @@ python manage.py shell
 ```
 >>> first.delete()
 ```
-
 ### 7.django语法
+1.导入html
+{% include "header.html" %}
+2.  
+在base.html中添加下列：
+```
+{% block content %}
+{% endblock %}
+```
+在index.html中导入base.html
+```
+{% extends "base.html" %}
+{% block content %}
+...添加内容
+{% endblock %}
+```
+3.for语句
+```
+{% for blog in blog_list %}
+...
+  <p>{{ blog.1 }}</p>
+...
+{% endfor %}
+```
+同样的还有：
+```
+{% if %} {% else %} {% endif %}
+```
+
+### 8.自定义filter
 
 1.在project/app下建立新文件夹templatetags  
 2.在templatetags中建立__init__.py  
@@ -254,14 +282,20 @@ def custom_markdown(value):
 ```
 
 4.然后在html中应用：  
-首先导入custom_markdown  
+首先导入custom_markdown
+```  
 {% load custom_markdown %}
+```
 然后在需要的地方：  
+```
 <p>{{ data|custom_markdown }}</p>
+```
 data是在访问网页时传入的数据，在views.py中的方法返回：
+```
 return render(request, 'test.html', {'data' : data1})
+```
 
-### 7.部署到nginx上
+### 9.部署到nginx上
 
 安装uwsgi和nginx
 

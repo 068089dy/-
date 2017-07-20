@@ -96,12 +96,13 @@ urlpatterns = [
 from django.conf.urls import url,include
 from django.contrib import admin
 import app.views
-```
+
 urlpatterns = [
     #url(r'^admin/', admin.site.urls),
     url(r'^$', app.views.blog),
     url(r'^([a-z，0-9]+)/', app.views.test),
 ]
+```
 这样当我们访问127.0.0.1/blog时，返回的就是app.views.blog的内容，访问127.0.0.1/blog/test (__([a-z，0-9]+)__)时，就返回app.views.test中的内容。
 ### 4.1.返回html
 上面只是返回字符串，如果想要返回一个网页，可以按如下步骤操作：

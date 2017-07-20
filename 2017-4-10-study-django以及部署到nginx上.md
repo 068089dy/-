@@ -74,7 +74,35 @@ urlpatterns = [
 ]
 ```
 这样我们在访问url时就会返回 Hello World, Django,qweqwe。
+#### 多级url
+比如127.0.0.1/blog/test这样的url：
+1.先在project/app目录下建立urls.py文件。
+2.然后在project/project/usrls中添加语句(__注意导入include__)：
+```
+from django.conf.urls import url,include
+from django.contrib import admin
 
+import article.views
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    ...
+    url(r'^blog/',include('app.urls')),
+    ...
+]
+```
+3.然后在project/app/urls.py中添加：
+```
+from django.conf.urls import url,include
+from django.contrib import admin
+import app.views
+```
+urlpatterns = [
+    #url(r'^admin/', admin.site.urls),
+    url(r'^$', app.views.blog),
+    url(r'^([a-z，0-9]+)/', app.views.test),
+]
+这样当我们访问127.0.0.1/blog时，返回的就是app.views.blog的内容，访问127.0.0.1/blog/test (__([a-z，0-9]+)__)时，就返回app.views.test中的内容。
 ### 4.1.返回html
 上面只是返回字符串，如果想要返回一个网页，可以按如下步骤操作：
 先写一个网页，在project目录下新建一个template目录，在目录下建一个html文档
@@ -240,7 +268,7 @@ uwsgi --http :8001 --wsgi-file test.py
 apt安装的要这样
 ```
 
-uwsgi --need-plugin python3 --httpocket :8001 --wsgi-file test.py 
+uwsgi --need-plugin python3 --httpocket :8001 --wsgi-file test.py
 
 ```
 

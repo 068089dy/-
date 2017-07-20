@@ -107,6 +107,14 @@ UEFI 用户这么做：
 ```
 # systemctl enable NetworkManager
 ```
+gnome-terminal可能打不开：
+查看/etc/locale.gen,如果有错，删掉，重装glibc：
+```
+sudo pacman -S glibc --force
+```
+
+
+
 ## 8.编码设置
 查看编码
 ```

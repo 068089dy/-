@@ -232,6 +232,35 @@ python manage.py shell
 >>> first.delete()
 ```
 
+### 7.django语法
+
+1.在project/app下建立新文件夹templatetags  
+2.在templatetags中建立__init__.py  
+3.在templatetags中新建custom_markdown.py:  
+```
+import markdown
+
+from django import template
+from django.template.defaultfilters import stringfilter
+from django.utils.encoding import force_text
+from django.utils.safestring import mark_safe
+
+register = template.Library()  #自定义filter时必须加上
+
+@register.filter(is_safe=True)  #注册template filter
+@stringfilter  #希望字符串作为参数
+def custom_markdown(value):
+    return mark_safe(markdown.markdown(value,extensions = ['markdown.extensions.fenced_code', 'markdown.extensions.codehilite']))
+```
+
+4.然后在html中应用：  
+首先导入custom_markdown  
+{% load custom_markdown %}
+然后在需要的地方：  
+<p>{{ data|custom_markdown }}</p>
+data是在访问网页时传入的数据，在views.py中的方法返回：
+return render(request, 'test.html', {'data' : data1})
+
 ### 7.部署到nginx上
 
 安装uwsgi和nginx

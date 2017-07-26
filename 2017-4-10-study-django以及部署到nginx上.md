@@ -146,6 +146,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 ```
+然后执行命令：
+```
+$ python manage.py collectstatic
+```
 在static下建立css和js目录，里面分别存放css和js文件，在网页中调用时，这样操作：
 ```
 <link href="/static/css/bootstrap.css" rel="stylesheet">
@@ -360,7 +364,68 @@ chmod-socket=664
 ```
 uwsgi --ini my_uwsgi.ini (--plugin python3)
 ```
+杀死uwsgi，进程相关的命令：
+```
+列出所有进程
+$ ps -ef
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 Jul25 ?        00:00:00 init
+root         2     1  0 Jul25 ?        00:00:00 [kthreadd/397239]
+root         3     2  0 Jul25 ?        00:00:00 [khelper/397239]
+root       364     1  0 Jul25 ?        00:00:00 /usr/sbin/sshd
+root       394     1  0 Jul25 ?        00:00:00 /usr/bin/python /usr/bin/ssserve
+nobody     396   394  0 Jul25 ?        00:00:01 /usr/bin/python /usr/bin/ssserve
+nobody     397   394  0 Jul25 ?        00:00:00 /usr/bin/python /usr/bin/ssserve
+root       434     1  0 Jul25 ?        00:00:00 nginx: master process /usr/local
+dy         435   434  0 Jul25 ?        00:00:00 nginx: worker process      
+dy         838     1  0 04:09 ?        00:00:00 /usr/local/python3/bin/uwsgi --i
+dy         849   838  0 04:09 ?        00:00:00 /usr/local/python3/bin/uwsgi --i
+dy         850   838  0 04:09 ?        00:00:00 /usr/local/python3/bin/uwsgi --i
+root       857   364  0 04:09 ?        00:00:00 sshd: dy [priv]  
+dy         859   857  0 04:10 ?        00:00:00 sshd: dy@pts/0   
+dy         860   859  0 04:10 pts/0    00:00:00 -bash
+dy         882   860  0 04:11 pts/0    00:00:00 ps -ef
 
+选出uwsgi相关进程
+$ ps -ef|grep uwsgi
+dy         838     1  0 04:09 ?        00:00:00 /usr/local/python3/bin/uwsgi --ini my_uwsgi.ini
+dy         849   838  0 04:09 ?        00:00:00 /usr/local/python3/bin/uwsgi --ini my_uwsgi.ini
+dy         850   838  0 04:09 ?        00:00:00 /usr/local/python3/bin/uwsgi --ini my_uwsgi.ini
+dy         884   860  0 04:11 pts/0    00:00:00 grep uwsgi
+
+排除grep进程
+$ ps -ef|grep uwsgi|grep -v grep
+dy         838     1  0 04:09 ?        00:00:00 /usr/local/python3/bin/uwsgi --ini my_uwsgi.ini
+dy         849   838  0 04:09 ?        00:00:00 /usr/local/python3/bin/uwsgi --ini my_uwsgi.ini
+dy         850   838  0 04:09 ?        00:00:00 /usr/local/python3/bin/uwsgi --ini my_uwsgi.ini
+
+列出第二列
+$ ps -ef|grep uwsgi|grep -v grep|awk '{print $2}'
+838
+849
+850
+
+杀死进程
+$ ps -ef|grep uwsgi|grep -v grep|awk '{print $2}'|xargs kill -9
+
+再查看进程
+$ ps -ef
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 Jul25 ?        00:00:00 init
+root         2     1  0 Jul25 ?        00:00:00 [kthreadd/397239]
+root         3     2  0 Jul25 ?        00:00:00 [khelper/397239]
+root       364     1  0 Jul25 ?        00:00:00 /usr/sbin/sshd
+root       394     1  0 Jul25 ?        00:00:00 /usr/bin/python /usr/bin/ssserver -s ::0 -p 443 -
+nobody     396   394  0 Jul25 ?        00:00:01 /usr/bin/python /usr/bin/ssserver -s ::0 -p 443 -
+nobody     397   394  0 Jul25 ?        00:00:00 /usr/bin/python /usr/bin/ssserver -s ::0 -p 443 -
+root       434     1  0 Jul25 ?        00:00:00 nginx: master process /usr/local/nginx/sbin/nginx
+dy         435   434  0 Jul25 ?        00:00:00 nginx: worker process      
+root       857   364  0 04:09 ?        00:00:00 sshd: dy [priv]  
+dy         859   857  0 04:10 ?        00:00:00 sshd: dy@pts/0   
+dy         860   859  0 04:10 pts/0    00:00:00 -bash
+dy         908   860  0 04:16 pts/0    00:00:00 ps -ef
+
+```
 #### 7.2.nginx
 
 更改/etc/nginx/nginx.conf

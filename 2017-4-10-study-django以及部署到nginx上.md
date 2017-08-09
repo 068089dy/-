@@ -476,3 +476,121 @@ sudo nginx -c nginx.conf(sudo nginx)
 ```
 #listen 127.0.0.1:80;    #监听本机80端口
 ```
+
+
+
+### 10.设置自启动
+
+#### 1.配置 Nginx 开启启动
+如果是源码安装（比如centos下只能源码安装）
+```
+sudo vim /etc/init.d/nginx
+```
+写入下列内容
+```
+#!/bin/bash
+# chkconfig: - 85 15
+nginx=/usr/local/nginx/sbin/nginx
+conf=/usr/local/nginx/conf/nginx.conf
+
+case $1 in      #判断相应的操作(start, stop, test, reload, restart, show )
+    start)
+        echo -n "Starting Nginx"
+        $nginx -c $conf
+        echo " done"
+    ;;
+
+    stop)
+        echo -n "Stopping Nginx"
+        $nginx -s stop
+        echo " done"
+    ;;
+
+    test)
+        $nginx -t -c $conf
+    ;;
+
+    reload)
+        echo -n "Reloading Nginx"
+        $nginx -s reload
+        echo " done"
+    ;;
+
+    restart)
+        $0 stop
+        $0 start
+    ;;
+
+    show)
+        ps -aux|grep nginx
+    ;;
+
+    *)
+        echo -n "Usage: $0 {start|restart|reload|stop|test|show}"
+    ;;
+
+esac
+```
+给脚本添加可执行属性 sudo chmod +x /etc/init.d/nginx
+
+添加为系统服务（开机自启动）
+
+sudo chkconfig --add nginx
+sudo chkconfig nginx on
+启动 Nginx 服务
+
+sudo service nginx start
+
+#### 2.配置 uWSGI 开机启动
+
+和 nginx 类似的操作：
+
+创建脚本
+
+sudo vim /etc/init.d/uwsgi
+
+写入
+
+#!/bin/bash
+# chkconfig: - 85 15
+uwsgi=/usr/local/python3/bin/uwsgi
+hello_conf=/home/dy/my_uwsgi.ini
+
+case $1 in
+    start)
+        echo -n "Starting uWsgi"
+        nohup $uwsgi $hello_conf &
+        echo " done"
+    ;;
+
+    stop)
+        echo -n "Stopping uWsgi"
+        killall -9 uwsgi
+        echo " done"
+    ;;
+
+    restart)
+        $0 stop
+        $0 start
+    ;;
+
+    show)
+        ps -ef|grep uwsgi|grep -v grep
+    ;;
+
+    *)
+        echo -n "Usage: $0 {start|restart|stop|show}"
+    ;;
+
+esac
+添加可执行属性
+
+sudo chmod +x /etc/init.d/uwsgi
+添加为系统服务
+
+sudo chkconfig --add uwsgi
+sudo chkconfig uwsgi on
+启动 uWSGI 服务
+
+sudo service uwsgi start
+注：脚本开头要写上 # chkconfig: - 85 15 ，不然无法添加为系统服务（网上有的代码少了这句话）。

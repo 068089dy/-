@@ -58,12 +58,13 @@ sudo service uwsgi start
 ### 2.systemd
 新建一个rc-local.service
 ```
-nano /usr/lib/systemd/system/rc-local.service
+nano /usr/lib/systemd/system/rc-local.service     #：软件包安装的单元
 ```
 或
 ```
-nano /usr/lib/systemd/system/rc-local.service
+nano /etc/systemd/system/rc-local.service     #：系统管理员安装的单元
 ```
+一般用软件包安装的单元,系统管理员安装的单元一般都是网络，桌面显示这些。
 写入以下内容
 ```
 [Unit]
@@ -83,9 +84,15 @@ WantedBy=multi-user.target
 systemctl enable rc-local.service
 ```
 然后:
+```
 nano /etc/rc.local
+```
 写入:
+```
 #!/bin/bash
 sslocal -c ss.conf
+```
 权限设置
+```
 sudo chmod +x /etc/rc.local
+```

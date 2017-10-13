@@ -73,6 +73,7 @@ zh_TW.UTF-8 UTF-8
 (4).将系统 locale 设置为en_US.UTF-8
 ```
 # echo LANG=en_US.UTF-8 > /etc/locale.conf
+如果英语不好的话还是设置成zh_CN.UTF-8
 ```
 (5).设置主机名
 ```
@@ -90,6 +91,8 @@ zh_TW.UTF-8 UTF-8
 UEFI 用户这么做：
 ```
 # grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub --recheck
+生成配置文件
+# grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 ## 7.安装后相关配置
@@ -107,15 +110,9 @@ UEFI 用户这么做：
 ```
 # systemctl enable NetworkManager
 ```
-gnome-terminal可能打不开：
-查看/etc/locale.gen,如果有错，删掉，重装glibc：
-```
-sudo pacman -S glibc --force
-```
 
-
-
-## 8.编码设置
+## 8.一些坑
+### 1.locale错误
 查看编码
 ```
 # locale
@@ -137,6 +134,22 @@ LC_MEASUREMENT=C
 LC_IDENTIFICATION="en_US.UTF-8"
 LC_ALL=
 ```
+编码错误导致gnome-terminal可能打不开：
+查看/etc/locale.gen,如果有错，删掉，重装glibc：
+```
+sudo pacman -S glibc --force
+```
+
+
+
+### 2.无线驱动
+```
+sudo pacman -S linux-headers
+sudo pacman -S broadcom-wl-dkms
+```
+
+
+
 改变编码
 ```
 # nano .bashrc   (或者.bash_profile)
@@ -147,3 +160,5 @@ export LC_ALL=en_US.UTF-8
 # LC_CTYPE=en_US.UTF-8
 # LC_ALL=en_US.UTF-8
 ```
+
+

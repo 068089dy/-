@@ -305,3 +305,14 @@ mysql>create database openfire;
 mysql>source /usr/local/openfire/resources/database/openfire_mysql.sql
 mysql> grant all on openfire.* to admin@"%" identified by 'admin'
 ```
+
+## vscode改字体
+文件->首选项->设置：  
+在右侧的窗口里的打括号内添加一行：
+```
+"editor.fontFamily": "Hack（字体）",
+```
+
+## BIOS UEFI启动设置
+boot（引导/启动）->Lunch CSM（兼容支持模块）->Enabled
+secure（安全）->secure boot control（安全引导）->Disabaled

@@ -313,6 +313,11 @@ mysql> grant all on openfire.* to admin@"%" identified by 'admin'
 "editor.fontFamily": "Hack（字体）",
 ```
 
-## BIOS UEFI启动设置
-boot（引导/启动）->Lunch CSM（兼容支持模块）->Enabled
-secure（安全）->secure boot control（安全引导）->Disabaled
+## UEFI BIOS启动设置
+### 1.bios启动
+UEFI固件兼容bios启动：  
+boot（引导/启动）->Lunch CSM（兼容支持模块）->Enabled  #兼容bios  
+secure（安全）->secure boot control（安全引导）->Disabled
+### 2.uefi启动
+boot（引导/启动）->Lunch CSM（兼容支持模块）->Disabled  #不兼容bios  
+secure（安全）->secure boot control（安全引导）->Enabled

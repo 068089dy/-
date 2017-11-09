@@ -321,3 +321,47 @@ secure（安全）->secure boot control（安全引导）->Disabled
 ### 2.uefi启动
 boot（引导/启动）->Lunch CSM（兼容支持模块）->Disabled  #不兼容bios  
 secure（安全）->secure boot control（安全引导）->Enabled
+
+## nasm简单使用
+运行在操作系统上：
+
+运行在裸机上：
+
+
+## EDK2环境搭建（archlinux）
+[原文](https://zhuanlan.zhihu.com/p/25941817)
+依赖：
+__gcc__
+__make__
+__g++__
+__libcrossguid(ubuntu下包名叫uuid-dev)__
+首先从EdkII官方github地址[tianocore/edk2](http://link.zhihu.com/?target=https%3A//github.com/tianocore/edk2)下载source tree。
+```
+make -C BaseTools
+source ./edksetup.sh
+```
+
+```
+nano Conf/target.txt
+```
+修改内容为：
+ACTIVE_PLATFORM        = ShellPkg/ShellPkg.dsc
+TARGET_ARCH            = IA32 X64
+TOOL_CHAIN_TAG         = GCC48
+```
+build
+```
+
+## archlinux网易云音乐踩坑
+安装
+```
+yaourt -S netease-cloud-music
+```
+启动不了
+```
+sudo nano /usr/share/applications/netease-cloud-music.desktop
+```
+修改：  
+Exec=netease-cloud-music %U --no-sandbox  
+白屏  
+卸载noto字体

@@ -365,3 +365,41 @@ sudo nano /usr/share/applications/netease-cloud-music.desktop
 Exec=netease-cloud-music %U --no-sandbox  
 白屏  
 卸载noto字体
+
+## 夏娜讲堂
+```
+#优化参数
+gcc -O2 hello.c -o hello-O2
+#md5哈希校验和，用于查看两个文件是否相同
+md5sum hello-O0 hello-O2
+#以16进制方式显示文件，less是逐行显示
+hexdump hello-O2 | less
+#-C
+#反汇编
+objdump -S hello-O2
+#对c文件进行汇编而不链接
+gcc -c hello.c
+#汇编
+as hello.s
+#产看文件属性类型
+file 文件
+```
+__objdump__
+```
+#反汇编
+objdump -d hello-O2
+#查看符号表
+objdump -sysms hello-O2
+#
+objcopy --sym hello-O2
+
+
+```
+__makefile__
+```
+目标文件：生成目标文件所需的文件
+      -@命令
+假目标：目标文件
+.PHONY=假目标
+```
+“-”表示错误继续执行，“@”表示不生成调试信息

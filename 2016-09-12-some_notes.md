@@ -367,34 +367,79 @@ Exec=netease-cloud-music %U --no-sandbox
 卸载noto字体
 
 ## 夏娜讲堂
+__gcc__:c编译工具
 ```
-#优化参数
+#优化参数"O2","-o"后面跟生成的可执行文件
 gcc -O2 hello.c -o hello-O2
+#对c文件进行汇编而不链接,生成hello.o文件
+gcc -c hello.c
+#"-I"后跟include文件夹
+#"-m32"表示按32位方式编译
+#"-nostdinc"不包含C语言的标准库里的头文件(没有"stdio.h","string.h"......)
+#"-fno-builtin"求gcc不主动使用自己的内建函数，除非显式声明。
+#"-fno-stack-protector"不使用栈保护等检测
+#"-ggdb和-gstabs+"添加相关的调试信息，调试对后期的排错很重要。
+```
+
+__md5sum__：md5校验和
+```
 #md5哈希校验和，用于查看两个文件是否相同
 md5sum hello-O0 hello-O2
-#以16进制方式显示文件，less是逐行显示
-hexdump hello-O2 | less
-#-C
-#反汇编
-objdump -S hello-O2
-#对c文件进行汇编而不链接
-gcc -c hello.c
-#汇编
-as hello.s
+```
+
+__file__:文件属性查看
+```
 #产看文件属性类型
 file 文件
 ```
-__objdump__
+
+__hexdump__:16进制查看器
+```
+#以16进制方式显示文件，less是逐行显示,"-C"参数会翻译显示
+hexdump hello-O2 | less
+```
+
+__as__：汇编
+```
+#汇编
+as hello.s
+```
+
+__nasm__:汇编
+```
+#"-f"后跟文件格式（elf,ef64）
+#"-g"生成调试信息
+eg:
+nasm -f elf -g hello.s
+```
+
+__ld__:链接工具
+```
+#"-T"后面跟链接器脚本
+#"-m"后是我们要生成的文件格式（elf64,elf_i386）
+#"-nostdlib"不链接C语言的标准库
+#"-o"生成二进制文件
+eg:
+ld -T scripts/kernel.ld -m elf_i386 -nostdlib hello.o hello1.o hello2.o -o hello
+```
+链接脚本的书写（）
+
+__objdump__：反汇编
 ```
 #反汇编
-objdump -d hello-O2
+objdump -d/-S hello-O2
 #查看符号表
 objdump -sysms hello-O2
+```
+
+__objcopy__:二进制文件操作
+```
 #
 objcopy --sym hello-O2
-
-
+#将文件转化位纯二进制文件（去掉elf_section头...）
+objcopy -O binary bootsect.o
 ```
+
 __makefile__
 ```
 目标文件：生成目标文件所需的文件

@@ -147,7 +147,8 @@ sudo pacman -S glibc --force
 sudo pacman -S linux-headers
 sudo pacman -S broadcom-wl-dkms
 ```
-
+### 3.字体设置
+参照[这里](https://wiki.archlinux.org/index.php/Font_Configuration/Chinese_Font_Configurations_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#Anti-aliasing.E6.95.88.E6.9E.9C.E7.9A.84.E5.AD.97.E4.BD.93.E5.8F.82.E8.80.83.E9.85.8D.E7.BD.AE)
 
 
 改变编码

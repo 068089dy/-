@@ -470,4 +470,5 @@ __启动__（在命令前加上proxychain4即可）
 
 ```
 proxychain4 curl https://www.google.com
+proxychain4 ./setup.sh
 ```

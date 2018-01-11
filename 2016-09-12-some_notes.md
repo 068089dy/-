@@ -448,3 +448,26 @@ __makefile__
 .PHONY=假目标
 ```
 “-”表示错误继续执行，“@”表示不生成调试信息
+## linux下命令行走ss代理
+__下载proxychain__
+```
+sudo pacman -S proxychain-ng
+```
+__配置文件__(默认是/etc/proxychains.conf)
+```
+strict_chain
+proxy_dns 
+remote_dns_subnet 224
+tcp_read_time_out 15000
+tcp_connect_time_out 8000
+localnet 127.0.0.0/255.0.0.0
+quiet_mode
+
+[ProxyList]
+socks5  127.0.0.1 1080
+```
+__启动__（在命令前加上proxychain4即可）
+
+```
+proxychain4 curl https://www.google.com
+```

@@ -448,6 +448,7 @@ __makefile__
 .PHONY=假目标
 ```
 “-”表示错误继续执行，“@”表示不生成调试信息
+
 ## linux下命令行走ss代理
 __下载proxychain__
 ```
@@ -472,3 +473,6 @@ __启动__（在命令前加上proxychain4即可）
 proxychain4 curl https://www.google.com
 proxychain4 ./setup.sh
 ```
+
+## linux查看wifi密码
+所有的wifi信息都在/etc/NetworkManager/system-connections/目录下，root打开看看就明白了。

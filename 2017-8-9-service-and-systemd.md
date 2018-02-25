@@ -66,6 +66,17 @@ nano /etc/systemd/system/rc-local.service     #：系统管理员安装的单元
 ```
 一般用软件包安装的单元,系统管理员安装的单元一般都是网络，桌面显示这些。
 写入以下内容
+__简易版__
+```
+[Unit]
+Description=shadowsocks
+[Service]
+Type=simple
+ExecStart=/usr/bin/sslocal -c /home/dy/ss.conf
+[Install]
+WantedBy=multi-user.target
+```
+__复杂版__
 ```
 [Unit]
 Description=/etc/rc.local Compatibility

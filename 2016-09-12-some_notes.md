@@ -476,3 +476,24 @@ proxychain4 ./setup.sh
 
 ## linux查看wifi密码
 所有的wifi信息都在/etc/NetworkManager/system-connections/目录下，root打开看看就明白了。
+
+
+## virtualbox虚拟机主机互传文件
+环境：
+虚拟机：win10
+宿主机：debian9
+---
+1.安装增强功能
+设备----安装增强功能----点击右下角跳出的东东----一路next安装。（重启）
+2.共享文件夹
+先在宿主机创建一个文件夹“static”，
+设置----共享文件夹----将“static”添加固定分配----勾选自动挂载和固定分配。
+
+## 以默认root权限启动应用
+以网易云音乐为例
+# sudo visudo
+添加下面这行
+dy ALL=ALLALL = NOPASSWD: /usr/bin/netease-cloud-music
+然后修好applications-desktop文件
+# sudo vim /usr/share/applications/netease-cloud-music.desktop
+修改Exec=netease-cloud-music %U这行为Exec=sudo netease-cloud-music %U

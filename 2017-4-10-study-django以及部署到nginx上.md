@@ -53,7 +53,14 @@ INSTALLED_APPS = (
 python manage.py createsuperuser
 ```
 创建超级用户之后，可以访问127.0.0.1：8000/admin访问
-### 4.关于url
+#### 重设admin user密码
+```
+from django.contrib.auth.models import User
+user =User.objects.get(username='admin')
+user.set_password('new_password')
+user.save()
+```
+### 4.关于url和模板（template）
 创建app后，我们可以把在app/views里添加方法，Eg.
 ```
 from django.shortcuts import render
@@ -104,7 +111,18 @@ urlpatterns = [
 ]
 ```
 这样当我们访问127.0.0.1/blog时，返回的就是app.views.blog的内容，访问127.0.0.1/blog/test (__([a-z，0-9]+)__)时，就返回app.views.test中的内容。
-### 4.1.返回html
+```
+#id是“test”，127.0.0.1/blog/“id”
+def view(request, id):
+    pass
+```
+
+#### 多url之间的跳转及数据传递
+```
+```
+#### 高级模板template
+
+### 4.1.返回html（template）
 上面只是返回字符串，如果想要返回一个网页，可以按如下步骤操作：
 先写一个网页，在project目录下新建一个template目录，在目录下建一个html文档
 
@@ -202,6 +220,48 @@ CharField 用于存储字符串, max_length设置最大长度
 TextField 用于存储大量文本
 DateTimeField 用于存储时间, auto_now_add设置True表示自动设置对象增加时间
 
+#### 外键以及manytomany
+ForeignKey
+```
+from django.db import models
+from django.contrib.auth.models import User
+
+# Create your models here.
+class head_comment(models.Model):
+    title = models.CharField(max_length = 100)
+    # 这里的user指向的是django auth框架中的model “User”
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    tags = models.TextField()
+    create_time = models.DateTimeField(auto_now_add = True)
+
+class comment(models.Model):
+    # 这里的father_id指向上面的head_comment
+    father_id = models.ForeignKey(head_comment, on_delete=models.CASCADE)
+    content = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    '''
+    如果一个表中有几个ManyToManyField，则要给每个ManyToManyField指定不同related_name参数。
+    而且不同的表中的related_name也不能相同。
+    不然会报错：
+    HINT: Add or change a related_name argument to the definition for 'comment.thumb_down' or 'comment.thumb_up'.
+    mycomment.comment.thumb_down: (fields.E304) Reverse accessor for 'comment.thumb_down' clashes with reverse accessor for 'comment.user'.
+    '''
+    thumb_up = models.ManyToManyField(User, related_name="comment_thumb_up")
+    thumb_down = models.ManyToManyField(User, related_name="comment_thumb_down")
+```
+
+#### 将model添加到admin下管理
+在project/app/admin.py中添加：
+```
+from django.contrib import admin
+from mycomment.models import head_comment, comment
+# Register your models here.
+
+admin.site.register(head_comment)
+admin.site.register(comment)
+```
+登录127.0.0.1:8000/admin，就能看到这两个model了。
 ### *同步数据库
 ```
 python manage.py makemigrations
@@ -235,6 +295,27 @@ python manage.py shell
 ```
 >>> first.delete()
 ```
+### [中间件](https://www.ctolib.com/topics-102842.html)
+在请求阶段，调用视图之前，Django根据它在MIDDLEWARE_CLASSES中定义的顺序自上而下应用中间件。两个可用的钩子：
+```
+process_request()
+process_view()
+```
+在响应阶段，调用视图后，中间件都以相反的顺序，从下往上被应用。三个可供选择的钩子：
+```
+process_exception() (只有当视图引发了一个异常的时候)
+process_template_response() (仅用于模板响应)
+process_response()
+```
+
+```
+__init__(self)
+process_request(self, request)
+process_view(self, request, view, args, kwargs)
+process_response(self, request, response)
+process_exception(self, request, exception)
+```
+
 ### 7.django语法
 1.导入html
 {% include "header.html" %}
@@ -298,6 +379,12 @@ data是在访问网页时传入的数据，在views.py中的方法返回：
 ```
 return render(request, 'test.html', {'data' : data1})
 ```
+
+### django ajax
+```
+
+```
+
 
 ### 9.部署到nginx上
 

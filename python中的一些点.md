@@ -29,6 +29,13 @@
 >>> text
 '2'
 ```
+另一种写法
+```
+>>> a = 1
+>>> text = ['2','1'][a == 1]
+>>> text
+'1'
+```
 ### 5.for/else与try/else
 ```
 # 若for循环完全执行完，没有break跳出，则执行else后面的内容
@@ -373,4 +380,9 @@ NameError: name 'a' is not defined
 True
 >>> 'a'.isdigit()
 False
+```
+### 去除str开头和结尾的空格
+```
+>>> '  aa   '.strip()
+'aa'
 ```

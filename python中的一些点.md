@@ -36,6 +36,13 @@ for ...
 else ..
 ```
 ### 6.容器（list,tuple,dict,set）
+list的添加
+```
+>>> l = ['1','2','3']
+>>> l.append('a')
+>>> l
+['1', '2', '3', 'a']
+```
 tuple的初始化：当tuple初始化只有一个元素时，这个元素后面必须加逗号。
 ```
 >>> l = (1)
@@ -328,4 +335,42 @@ for i in fib():
 6
 7
 8
+```
+
+### 删除变量
+```
+>>> a = 1
+>>> a
+1
+>>> del a
+>>> a
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'a' is not defined
+```
+也可以删除容器中的某一元素
+```
+>>> l
+['1', '2', '3', 'a']
+>>> del l[0]
+>>> l
+['2', '3', 'a']
+```
+### ascii码
+```
+>>> ord('D')
+68
+>>> ord('Y')
+89
+>>> ord('0')
+48
+>>> ord(')')
+41
+```
+### 判断str是否可以转化为数字(isdigit())
+```
+>>> '4'.isdigit()
+True
+>>> 'a'.isdigit()
+False
 ```

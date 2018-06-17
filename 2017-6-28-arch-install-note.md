@@ -129,6 +129,10 @@ Server=https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 # sudo pacman -S yaourt
 # sudo pacman -S archlinuxcn-keyring
 ```
+## 9.flash
+```
+sudo pacman -S pepper-flash flashplugin
+```
 ## 一些坑
 ### 1.locale错误
 查看编码

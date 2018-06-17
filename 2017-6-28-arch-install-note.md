@@ -120,8 +120,15 @@ sudo pacman -S ibus ibus-googlepinyin
 ```
 # systemctl enable NetworkManager
 ```
-
-## 8.一些坑
+## 8.安装yaourt
+在/etc/pacman.conf文件末尾添加两行
+```
+[archlinuxcn]
+Server=https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+# sudo pacman -Syy
+# sudo pacman -S yaourt
+```
+## 一些坑
 ### 1.locale错误
 查看编码
 ```

@@ -100,6 +100,16 @@ UEFI 用户这么做：
 ```
 # pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji
 ```
+安装桌面环境
+```
+sudo pacman -S xorg gnome
+```
+中文输入
+```
+sudo pacman -S ibus ibus-googlepinyin
+```
+然后子系统设置->语言中添加汉语（pinyin）
+
 激活需要的服务
 
 (1).

@@ -127,6 +127,7 @@ sudo pacman -S ibus ibus-googlepinyin
 Server=https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 # sudo pacman -Syy
 # sudo pacman -S yaourt
+# sudo pacman -S archlinuxcn-keyring
 ```
 ## 一些坑
 ### 1.locale错误

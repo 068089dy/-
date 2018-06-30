@@ -288,6 +288,12 @@ mysql> use rssdb;
 //列出
 //删除
 //查找
+//导出
+mysql -u username -p testdatabase > file.sql //导出数据库testdatabase的数据和表
+mysql -u username -p testdatabase -d > file.sql //导出数据库testdatabase的表
+//导入
+use database;
+source file.sql;
 ```
 
 ## openfire相关

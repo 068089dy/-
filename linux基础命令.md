@@ -29,6 +29,7 @@ lspci
 ### 磁盘信息
 ```
 fdisk -l
+df
 ```
 ### 主机信息
 ### 常用操作
@@ -43,6 +44,16 @@ apt
 pacman
 yaourt
 yum
+```
+yum install package //安装package
+yum update  //全局更新
+yum update package  //更新package
+yum upgrade //升级
+yum upgrade package //升级package
+yum info package  //信息
+yum remove package  //删除
+yum 
+```
 dpkg
 rpm
 ### 编辑
@@ -76,4 +87,10 @@ scp
 ftp
 ### 服务
 systemd
+```
+systemctl start test.service
+systemctl stop test.service
+systemctl restart test.service
+systemctl cat test.service
+```
 service

@@ -503,3 +503,49 @@ dy ALL=ALLALL = NOPASSWD: /usr/bin/netease-cloud-music
 然后修好applications-desktop文件
 # sudo vim /usr/share/applications/netease-cloud-music.desktop
 修改Exec=netease-cloud-music %U这行为Exec=sudo netease-cloud-music %U
+
+
+### 端口映射（frp）
+```
+wget https://github.com/fatedier/frp/releases/download/v0.16.0/frp_0.16.0_linux_amd64.tar.gz
+tar -zxvf frp_0.16.0_linux_amd64.tar.gz
+frp_0.16.0_linux_amd64
+ls
+# 如下
+# LICENSE  frpc  frpc.ini  frpc_full.ini	frps  frps.ini	frps_full.ini
+```
+#### 服务端
+修改frps.ini
+```
+[common]
+bind_port = 9000
+vhost_http_port = 80
+auth_token = frp
+```
+启动
+```
+./frps -c frps.ini
+```
+#### 客户端
+修改frpc.ini
+```
+[common]
+server_addr = 23.106.133.142
+server_port = 9000
+
+[ssh]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 22
+remote_port = 6000
+
+[www]
+type = http
+custom_domains = 66.dingdinghaha.com.cn
+local_port = 8000
+auth_token = frp
+```
+启动
+```
+./frpc -c frpc.ini
+```

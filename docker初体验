@@ -59,8 +59,9 @@ Live Restore Enabled: false
 ```
 # 下载镜像
 [dy@dy-pc code]$ docker image pull hello-world
-# 运行
+# 新建并运行容器
 [dy@dy-pc code]$ sudo docker container run hello-world
+
 
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
@@ -83,6 +84,13 @@ Share images, automate workflows, and more with a free Docker ID:
 For more examples and ideas, visit:
  https://docs.docker.com/engine/userguide/
 
+```
+
+```
+# 开始容器
+[dy@dy-pc code]$ sudo docker container start hello-world
+# 停止容器
+[dy@dy-pc code]$ sudo docker container run hello-world
 ```
 
 ```
@@ -133,5 +141,10 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 9f246bb187fb        hello-world         "/hello"            18 minutes ago      Exited (0) 18 minutes ago                       mystifying_mayer
 # 杀死一个正在运行的容器
 [dy@dy-pc code]$ sudo docker container kill id
+
+```
+
+
+```
 
 ```

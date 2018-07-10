@@ -114,3 +114,23 @@ toendeavour/archlinux                 These images contain archlinux for arm and
 calamares/jenkins-slave-archlinux     Arch Linux Jenkins slave images for the Cala…   0                                       [OK]
 lopsided/archlinux 
 ```
+
+```
+# 列出正在运行的容器
+[dy@dy-pc code]$ sudo docker container ls
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+# 列出所有容器
+[dy@dy-pc code]$ sudo docker container ls --all
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+512d45a5414c        hello-world         "/hello"            4 minutes ago       Exited (0) 4 minutes ago                        objective_gates
+9f246bb187fb        hello-world         "/hello"            17 minutes ago      Exited (0) 17 minutes ago                       mystifying_mayer
+# 删除一个容器
+[dy@dy-pc code]$ sudo docker container rm 512d45a5414c
+512d45a5414c
+[dy@dy-pc code]$ sudo docker container ls --all
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+9f246bb187fb        hello-world         "/hello"            18 minutes ago      Exited (0) 18 minutes ago                       mystifying_mayer
+# 杀死一个正在运行的容器
+[dy@dy-pc code]$ sudo docker container kill id
+
+```

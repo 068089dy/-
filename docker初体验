@@ -1,0 +1,116 @@
+### 1.安装
+```
+[dy@dy-pc code]$ sudo pacman -S docker
+```
+### 2.启动
+```
+[dy@dy-pc code]$ sudo systemctl start docker
+```
+### 3.查看
+```
+[dy@dy-pc code]$ sudo docker info
+
+Containers: 1
+ Running: 0
+ Paused: 0
+ Stopped: 1
+Images: 1
+Server Version: 18.05.0-ce
+Storage Driver: overlay2
+ Backing Filesystem: extfs
+ Supports d_type: true
+ Native Overlay Diff: false
+Logging Driver: json-file
+Cgroup Driver: cgroupfs
+Plugins:
+ Volume: local
+ Network: bridge host macvlan null overlay
+ Log: awslogs fluentd gcplogs gelf journald json-file logentries splunk syslog
+Swarm: inactive
+Runtimes: runc
+Default Runtime: runc
+Init Binary: docker-init
+containerd version: 773c489c9c1b21a6d78b5c538cd395416ec50f88
+runc version: 4fc53a81fb7c994640722ac585fa9ca548971871
+init version: 949e6fa
+Security Options:
+ seccomp
+  Profile: default
+Kernel Version: 4.14.53-1-MANJARO
+Operating System: Manjaro Linux
+OSType: linux
+Architecture: x86_64
+CPUs: 4
+Total Memory: 11.63GiB
+Name: dy-pc
+ID: JYHV:KPOX:FVUI:ATBL:XHNE:SXXP:5FPA:HSPT:RU7F:EEMR:DCF5:SHVA
+Docker Root Dir: /var/lib/docker
+Debug Mode (client): false
+Debug Mode (server): false
+Registry: https://index.docker.io/v1/
+Labels:
+Experimental: false
+Insecure Registries:
+ 127.0.0.0/8
+Live Restore Enabled: false
+
+```
+### 4.运行helloworld
+```
+# 下载镜像
+[dy@dy-pc code]$ docker image pull hello-world
+# 运行
+[dy@dy-pc code]$ sudo docker container run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/engine/userguide/
+
+```
+### 搜索镜像
+```
+[dy@dy-pc code]$ sudo docker search archlinux
+NAME                                  DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
+base/archlinux                        Basic ArchLinux installation                    305                                     [OK]
+pritunl/archlinux                     Archlinux base image with snapshot repository   101                                     
+archlinux/base                        Docker Base Image for Arch Linux                41                                      
+finalduty/archlinux                   A minimal Arch Linux base image for Docker, …   23                                      [OK]
+logankoester/archlinux                A fully updated Arch Linux base image built …   8                                       [OK]
+rafaelsoares/archlinux                Archlinux Docker image with official reposit…   5                                       
+stephank/archlinux                    Unofficial Arch Linux images                    4                                       
+thedcg/tl-archlinux                   tl-archlinux                                    2                                       [OK]
+opamp/archlinux                       my archlinux base image with yaourt             1                                       [OK]
+desiato/build-archlinux               archlinux-bootstrap builder                     1                                       [OK]
+finalduty/archlinux-base              Personalised ArchLinux image                    1                                       [OK]
+nerzhul/archlinux                     Archlinux up-to-date images for C/C++ develo…   1                                       
+showgood163/archlinuxwithopenssh      latest archlinux with openssh support, EXPER…   1                                       [OK]
+alekzonder/archlinux                  fresh archlinux image every day                 1                                       [OK]
+treemo/archlinux-with-yaourt          archlinux with yaourt                           1                                       [OK]
+mbessler/archlinux-kairosdb           Adds Kairosdb to ngty/archlinux-jdk7.  Sourc…   1                                       [OK]
+grzanka/archlinux_python              Archlinux python                                0                                       [OK]
+lopsided/archlinux-armv7h             Basic ArchLinux installation for armv7h (Ras…   0                                       
+lopsided/archlinux-armv6h             Basic ArchLinux installation for armv6h (Ras…   0                                       
+aitorpazos/archlinux-docker-makepkg   A Docker image that allows building ArchLinu…   0                                       [OK]
+alekzonder/archlinux-yaourt           fresh archlinux with yaourt tool for buildin…   0                                       [OK]
+smartentry/archlinux                  archlinux with smartentry                       0                                       [OK]
+toendeavour/archlinux                 These images contain archlinux for arm and i…   0                                       [OK]
+calamares/jenkins-slave-archlinux     Arch Linux Jenkins slave images for the Cala…   0                                       [OK]
+lopsided/archlinux 
+```

@@ -1,13 +1,14 @@
-### 1.安装
+### 基础命令
 ```
+# 1.安装
 [dy@dy-pc code]$ sudo pacman -S docker
 ```
-### 2.启动
 ```
+# 2.启动
 [dy@dy-pc code]$ sudo systemctl start docker
 ```
-### 3.查看
 ```
+# 3.查看信息
 [dy@dy-pc code]$ sudo docker info
 
 Containers: 1
@@ -55,7 +56,6 @@ Insecure Registries:
 Live Restore Enabled: false
 
 ```
-### 4.运行helloworld
 ```
 # 下载镜像
 [dy@dy-pc code]$ docker image pull hello-world
@@ -84,8 +84,9 @@ For more examples and ideas, visit:
  https://docs.docker.com/engine/userguide/
 
 ```
-### 搜索镜像
+
 ```
+# 搜索镜像
 [dy@dy-pc code]$ sudo docker search archlinux
 NAME                                  DESCRIPTION                                     STARS               OFFICIAL            AUTOMATED
 base/archlinux                        Basic ArchLinux installation                    305                                     [OK]

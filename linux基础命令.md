@@ -31,6 +31,17 @@ lspci
 fdisk -l
 df
 ```
+扩展分区
+```
+fdisk /dev/sdX
+  p #列出
+  d #删除（分区号）
+  n #新建（选分区号，和开始结束位）
+umount ／dev/sdXx
+e2fsck -f /dev/sdb2 #检查分区信息
+resize2fs -p /dev/sdb2  #调整分区大小
+
+```
 ### 主机信息
 ### 常用操作
 1.环境变量

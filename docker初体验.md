@@ -57,6 +57,9 @@ sudo docker load < arch.tar
 
 ```
 新建Dockerfile
+```
+
+```
 ### 提交容器
 1.先在[https://hub.docker.com/](https://hub.docker.com/)注册
 2.在本机登录
@@ -74,4 +77,25 @@ sudo docker image push 068089dy/koa_arch:0.0.1
 5.修改
 ```
 docker commit 698 learn/ping
+```
+
+### 删除容器可镜像
+```
+杀死所有正在运行的容器
+
+docker kill $(docker ps -a -q)
+
+删除所有已经停止的容器
+
+docker rm $(docker ps -a -q)
+
+删除所有未打 dangling 标签的镜像
+
+docker rmi $(docker images -q -f dangling=true)
+
+删除所有镜像
+
+docker rmi $(docker images -q)
+
+
 ```

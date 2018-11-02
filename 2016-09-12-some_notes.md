@@ -549,3 +549,56 @@ auth_token = frp
 ```
 ./frpc -c frpc.ini
 ```
+
+
+### 分布式文件存储系统FDFS
+nginx上部署
+http://blog.mayongfa.cn/193.html
+
+docker搭建方法
+http://insmoin.com/?post=109
+本地客户端测试命令
+```
+上传文件（会返回组及文件id信息）
+fdfs_upload_file client.conf client.conf
+fdfs_test client.conf upload client.conf
+删除文件
+fdfs_delete_file 配置文件 文件id 
+fdfs_delete_file client.conf group1/M00/00/00/wKjngVvcH5iAK76bAAAFuBkXTwM71.conf
+下载文件
+fdfs_download_file 配置文件 文件id 本地文件
+fdfs_download_file client.conf group1/M00/00/00/wKjngVvcGn6AVO_OAAAFuBkXTwM80.conf client1.conf
+```
+配置文件client.conf的修改
+```
+tracker_server=192.168.231.129:22122
+```
+python3中使用
+```
+pip install py3Fdfs
+
+from fdfs_client.client import Fdfs_client, get_tracker_conf
+# Create your tests here.
+
+tracker = get_tracker_conf('/home/ding/test/client.conf')
+
+# tracker = {
+#     "timeout": 30,
+#     "host_tuple": ("192.168.231.129",),
+#     "port": 22122
+# }
+client = Fdfs_client(tracker)
+# 上传
+ret = client.upload_by_filename('./tests.py')
+print(ret)
+
+{'Group name': b'group1', 'Remote file_id': b'group1/M00/00/00/wKjngVvcLeGAd2nNAAACbQT4uIo3562.py', 'Status': 'Upload successed.', 'Local file name': './tests.py', 'Uploaded size': '621B', 'Storage IP': b'192.168.231.129'}
+
+# 下载
+ 
+```
+django中使用
+http://insmoin.com/?post=110
+```
+
+```

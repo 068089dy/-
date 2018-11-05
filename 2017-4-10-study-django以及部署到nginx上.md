@@ -250,7 +250,24 @@ class comment(models.Model):
     thumb_up = models.ManyToManyField(User, related_name="comment_thumb_up")
     thumb_down = models.ManyToManyField(User, related_name="comment_thumb_down")
 ```
+抽象model
+```
+class TokenMonthconfirmed(models.Model):
+    class Meta:
+        abstract = True
 
+    @classmethod
+    def setDb_table(Class, tableName):
+        class Meta:
+            # db_table指定在数据库中，当前模型生成的数据表的表名。
+            db_table = tableName
+
+        attrs = {
+            '__module__': Class.__module__,
+            'Meta': Meta
+        }
+        return type(tableName, (Class,), attrs)
+```
 #### 将model添加到admin下管理
 在project/app/admin.py中添加：
 ```

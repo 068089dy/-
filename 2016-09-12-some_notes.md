@@ -595,7 +595,7 @@ print(ret)
 {'Group name': b'group1', 'Remote file_id': b'group1/M00/00/00/wKjngVvcLeGAd2nNAAACbQT4uIo3562.py', 'Status': 'Upload successed.', 'Local file name': './tests.py', 'Uploaded size': '621B', 'Storage IP': b'192.168.231.129'}
 
 # 下载
- 
+client.download_to_file("./tests2.py", 'group1/M00/00/00/wKjngVvcLTmAeLahAAACIP7ne7A1883.py')
 ```
 django中使用
 http://insmoin.com/?post=110

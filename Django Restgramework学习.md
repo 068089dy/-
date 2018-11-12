@@ -121,7 +121,7 @@ path('api-token-auth/', views.CustomAuthToken.as_view())
 ```
 这样，在post参数中添加username和password即可获取到token，header中要加Content-Type ： application/x-www-form-urlencoded。
 4.使用token请求
-```
+``` python
 # 在通用视图中添加token认证
 from rest_framework.authentication import TokenAuthentication
 
@@ -142,4 +142,29 @@ class ArticleListView(
 ```
 Authorization ： Token 9c92543f96b36ac6de64a48e06b1a65ada83a38e
 ```
+### 通用视图中为不同方法设置不同的认证
+写一个装饰器
+``` python
+from functools import update_wrapper
 
+
+def wrap_permission(*permissions, validate_permission=True):
+    """custom permissions for special route"""
+    def decorator(func):
+        def wrapper(self, request, *args, **kwargs):
+            self.permission_classes = permissions
+            if validate_permission:
+                self.check_permissions(request)
+            return func(self, request, *args, **kwargs)
+        return update_wrapper(wrapper, func)
+    return decorator
+```
+假如要为post请求设置权限
+```
+...
+    @wrap_permission(permissions.IsAdminUser)
+    def post(self, request, *args, **kwargs):
+        self.serializer_class = FactorySerializer.get_serializer(Article, attr_exclude=('volume', ))
+        return self.create(request, *args, **kwargs)
+...
+```

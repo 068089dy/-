@@ -28,6 +28,32 @@ class ArticleSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'description', 'classification', 'tags', 'date', 'volume')
 
 ```
+序列化的工厂方法
+```
+from rest_framework import serializers
+
+
+class FactorySerializer(serializers.ModelSerializer):
+
+    @classmethod
+    def get_serializer(cls, attr_model, attr_field='__all__', attr_exclude=()):
+        class Meta:
+            model = attr_model
+            if attr_exclude:
+                exclude = attr_exclude
+            else:
+                fields = attr_field
+            depth = 1
+        attrs = {
+            '__module__': cls.__module__,
+            'Meta': Meta
+        }
+        return type(attr_model.__name__+'Serializer', (cls,), attrs)
+
+# 视图中使用
+serializer_class = FactorySerializer.get_serializer(Article, attr_exclude=('content', 'html_content'))
+```
+
 ### 1.ViewSet
 drf的ViewSet继承了
 Viewset一般会和router一起使用，以达到一个标准的rest规范的效果，比如：

@@ -1,9 +1,11 @@
 ### 系统信息
 ```
-# 内核版本
+# linux内核版本
 more /proc/version
-# 系统版本
+# 发行版
 more /etc/issue
+
+uname -r
 ```
 ### 硬件信息
 cpu
@@ -14,9 +16,9 @@ more /proc/cpuinfo | grep "model name"
 ```
 getconf LONG_BIT
 ```
-内存
+内存和交换空间
 ```
-free
+free -h
 ```
 usb设备
 ```
@@ -67,8 +69,20 @@ rm -rf *.py
 ```
 ### 软件管理
 apt
+```
+apt update  //更新软件源
+apt upgrade //更新软件包
+apt install //
+apt remove  //
+```
 pacman
-yaourt
+```
+pacman -S 下载安装
+pacman -R 删除
+pacman -Ss 搜索
+```
+yay 同上
+
 yum
 ```
 yum install package //安装package
@@ -82,15 +96,46 @@ yum
 ```
 dpkg
 rpm
-### 编辑
+### 编辑，查看，写入
 vi
 vim
+```
+normal模式：刚进入vim，就是normal模式
+
+删当前光标所在的一个字符：x
+保存：:w
+退出：:q
+强制退出：:q!
+剪切当前行：dd
+粘贴：p
+
+insert模式：normal下按i进入insert模式，再按esc退回到normal模式。
+
+```
 nano
+```
+复制一行：alt+6
+剪切一行：ctrl+k
+粘贴：ctrl+u
+
+部分复制：先将光标移到要复制部分的开头，然后按住alt+a，开始选中，然后alt+6/ctrl+k
+
+上一页：ctrl+y
+下一页：ctrl+v
+
+搜索：Ctrl+w，然后输入要搜索的单词，如果要跳到下一个，则继续按ctrl+w，然后直接回车。
+
+保存：ctrl+o
+退出：ctrl+x
+```
 gedit
+cat
+echo
 ### 压缩解压
 ### 查找
 find
 grep
+sed
 whereis
 
 ### 网络
@@ -105,6 +150,26 @@ passwd
 ### 文件管理及权限
 chown
 chmod
+w，r，x三个字母分别表示读，写，执行权限；同时又可以用4，2，1代替。
+EG：
+```
+ll file //查看file权限
+-rw-rw-rw- 1 dy dy 0 Dec  7 10:28 file
+```
+给file增加可执行权限
+```
+chmod +x file //给file增加可执行权限
+```
+文件可执行
+```
+-rwxrwxrwx 1 dy dy 0 Dec  7 10:28 file* //文件可执行
+```
+改变用户权限为421
+```
+chmod 421 file  //改变用户权限为421
+ll file
+-r---w---x 1 dy dy 0 Dec  7 10:28 file*
+```
 rm
 mv
 cp

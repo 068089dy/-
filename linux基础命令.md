@@ -131,6 +131,24 @@ nano
 gedit
 cat
 echo
+### 进程及端口管理
+ps
+#### netstat
+查看占用端口的进程号
+```shell
+➜  ~ netstat -anp | grep 9999
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+tcp        0      0 127.0.0.1:9999          0.0.0.0:*               LISTEN      7918/python         
+➜  ~ lsof -i:9999
+COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+python  7918 ding    3u  IPv4 117917      0t0  TCP localhost:distinct (LISTEN)
+```
+kill
+```shell9
+
+```
+
 ### 压缩解压
 ### 查找
 find

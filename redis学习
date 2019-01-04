@@ -1,0 +1,6 @@
+1.安装
+```
+yum groupinstall 'Development Tools'
+```
+2.
+3.

@@ -150,6 +150,12 @@ kill
 ```
 
 ### 压缩解压
+tar
+```
+tar -zxvf test.tar.gz
+```
+unzip
+7z
 ### 查找
 find
 grep
@@ -202,5 +208,6 @@ systemctl start test.service
 systemctl stop test.service
 systemctl restart test.service
 systemctl cat test.service
+systemctl list-unit-files  查看开机启动项 
 ```
 service

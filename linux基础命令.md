@@ -209,5 +209,7 @@ systemctl stop test.service
 systemctl restart test.service
 systemctl cat test.service
 systemctl list-unit-files  查看开机启动项 
+systemctl enable test #开机启动
+systemctl list-units --type=service #查看所有已启动服务
 ```
 service

@@ -37,4 +37,8 @@ show global variables like "%datadir%";
 ```
 docker logs 容器 
 ```
-### 8.
+### 8.mysql数据文件的迁移
+最近重启的一次服务器，然后博客的mysql就莫名启动不了了，我的mysql是装在docker容器上的，容器无法启动，如何导出数据库中的数据呢？__一种可行的方法就是
+直接copy出/var/lib/mysql/下的数据文件，再粘贴到新的mysql的数据文件夹下即可，此过程需要注意以下几点：__
+* 1.除了需要甬道的database，还要将`ib`开头的innodb文件也拷贝。
+* 2.拷贝过来之后记得加权限`chown mysql:mysql /var/lib/mysql/ -R`

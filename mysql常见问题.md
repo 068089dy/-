@@ -11,10 +11,12 @@ __注：此操作进行时任何人都能免密登录数据库，操作前做好
 ```
 mysql -uroot
 mysql> USE mysql ;
+注意：Password字段在不同版本中不同，比如还可能是authentication_string，要describe user看一看
 mysql> UPDATE user SET Password = password ( 'new-password' ) WHERE User = 'root' ;
 mysql> flush privileges ;
 mysql> quit
 ```
+删除配置文件中的`skip-grant-tables`
 * 再重启mysql
 ```
 /etc/init.d/mysqld restart  ( service mysqld restart )

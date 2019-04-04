@@ -31,15 +31,18 @@ lspci
 ### 磁盘信息
 ```
 fdisk -l
-df
+# 所有分区空间
+df -h ./
+# 当前目录空间
+du -h
 ```
 扩展分区
 ```
 fdisk /dev/sdX
   p #列出
-  d #删除（分区号）
+  d #删除（分区号）#删除要扩展的分区，这里删除并不会删除分区上的数据
   n #新建（选分区号，和开始结束位）
-umount ／dev/sdXx
+umount /dev/sdXx
 e2fsck -f /dev/sdb2 #检查分区信息
 resize2fs -p /dev/sdb2  #调整分区大小
 
@@ -47,10 +50,12 @@ resize2fs -p /dev/sdb2  #调整分区大小
 ### 主机信息
 ### 常用操作
 1.环境变量
+```
 export
 env
 whereis
 who
+```
 2.软链接，硬链接(ln)
 软链接就是个快捷方式，硬链接可认为是一个文件拥有两个文件名。
 ln
@@ -74,14 +79,17 @@ apt update  //更新软件源
 apt upgrade //更新软件包
 apt install //
 apt remove  //
+apt autoremove //自动删除没用的
+apt install -f //解决依赖
 ```
 pacman
 ```
 pacman -S 下载安装
 pacman -R 删除
 pacman -Ss 搜索
+pacman -Qs #搜索本地安装包
 ```
-yay 同上
+yay，yaourt 同上
 
 yum
 ```
@@ -95,9 +103,11 @@ yum remove package  //删除
 yum 
 ```
 dpkg
+```
+dpkg -i #安装
+```
 rpm
 ### 编辑，查看，写入
-vi
 vim
 ```
 normal模式：刚进入vim，就是normal模式
@@ -110,8 +120,9 @@ normal模式：刚进入vim，就是normal模式
 粘贴：p
 
 insert模式：normal下按i进入insert模式，再按esc退回到normal模式。
-
+visual模式：normal下按v进入visual模式，可以选择文本
 ```
+
 nano
 ```
 复制一行：alt+6
@@ -145,7 +156,7 @@ COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
 python  7918 ding    3u  IPv4 117917      0t0  TCP localhost:distinct (LISTEN)
 ```
 kill
-```shell9
+```shell
 
 ```
 
@@ -160,12 +171,17 @@ unzip
 find
 grep
 sed
+awk
+```
+awk '{print $2}'  #匹配第二列
+```
 whereis
 
 ### 网络
 ip
 ifconfig
 iptables
+tcpdump
 ### 多用户，组及权限
 useradd
 usermod
@@ -212,4 +228,11 @@ systemctl list-unit-files  查看开机启动项
 systemctl enable test #开机启动
 systemctl list-units --type=service #查看所有已启动服务
 ```
+ journalctl 
+```
+journalctl --list-boots #列出引导记录
+journalctl -b -1 #显示上次引导记录日志
+journalctl --since "2015-01-10" --until "2015-01-11 03:00"    #限定日期查看
+```
+
 service

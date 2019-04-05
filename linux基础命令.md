@@ -163,9 +163,21 @@ kill
 ### 压缩解压
 tar
 ```
-tar -zxvf test.tar.gz
+-c 打包
+-x 解包
+-t 列出文件
+-v 显示过程
+-f 指定打包后的文件名
+tar -cvf 打包文件名 源文件    # 打包
+tar -tvf 文件     #列出归档
+tar -zxvf test.tar.gz   #解压
 ```
-unzip
+zip
+```
+zip 压缩文件名 源文件   #压缩文件
+zip -r 压缩文件名 源文件    #压缩目录
+unzip 文件名   #解压
+```
 7z
 ### 查找
 find
@@ -182,6 +194,9 @@ ip
 ifconfig
 iptables
 tcpdump
+```
+
+```
 ### 多用户，组及权限
 useradd
 usermod

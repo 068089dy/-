@@ -181,6 +181,27 @@ unzip 文件名   #解压
 7z
 ### 查找
 find
+```
+# 按名称
+find ./ -name 文件名正则
+-i：忽略大小写
+# 按所有者
+find /root -user root
+find /root nouser
+# 按时间
+find hello.txt -mtime +5
+mtime：修改文件内容
+ctime：改变文件属性
+atime：文件访问时间
+-5：五天内
++5：五天前
+5：5天前当天修改的
+# 按大小搜索
+find . size 100k
+-8k：小于8k
++8M：大于8M
+6k：等于6k
+```
 grep
 sed
 awk

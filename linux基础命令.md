@@ -269,6 +269,11 @@ systemctl list-units --type=service #查看所有已启动服务
 journalctl --list-boots #列出引导记录
 journalctl -b -1 #显示上次引导记录日志
 journalctl --since "2015-01-10" --until "2015-01-11 03:00"    #限定日期查看
+  --since的使用：
+    1.可以加 today：journalctl -u nginx.service --since today 检查今天某项服务的运行状态：
+    2.journalctl --since 09:00 --until "1 hour ago" 获得早9：00到一小时前这段时间内的报告
+journalctl -u v2ray #查看指定服务日志
+
 ```
 
 service

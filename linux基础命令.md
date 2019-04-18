@@ -277,3 +277,5 @@ journalctl -u v2ray #查看指定服务日志
 ```
 
 service
+### 日志
+内核日志 dmesg
